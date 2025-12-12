@@ -3,13 +3,10 @@
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField]
-    public float moveSpeed = 5f;
+    public float _moveSpeed = 5f;
     [SerializeField]
-    public float turnSpeed = 10f;
-    [SerializeField]
-    public float gravity = -9.8f;
-    [SerializeField]
-    public float jumpHeight = 2f;
+    public float _turnSpeed = 10f;
+    public float _gravity = -9.8f;
 
     CharacterController controller;
 
@@ -27,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = new Vector3(h, 0, v).normalized;
 
         // Sprint with holding LeftShift
-        float currentSpeed = moveSpeed;
+        float currentSpeed = _moveSpeed;
         if (Input.GetKey(KeyCode.LeftShift))
         {
             currentSpeed *= 2;
@@ -38,12 +35,12 @@ public class PlayerMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
             Quaternion rot = Quaternion.Euler(0, targetAngle, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * turnSpeed);
+            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * _turnSpeed);
 
             controller.Move(transform.forward * currentSpeed * Time.deltaTime);
         }
 
         // Gravity
-        controller.Move(Vector3.up * gravity * Time.deltaTime);
+        controller.Move(Vector3.up * _gravity * Time.deltaTime);
     }
 }

@@ -145,7 +145,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9aa913b525572c41892ee5b259c7ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
-  turnSpeed: 10
-  gravity: -9.81
-  jumpHeight: 2
+  _moveSpeed: 5
+  _turnSpeed: 10

@@ -3,9 +3,9 @@
 public class Batman_Movement : MonoBehaviour
 {
     [SerializeField]
-    private float _moveSpeed = 5f;
+    private float _moveSpeed = 10f;
     [SerializeField]
-    private float _turnSpeed = 10f;
+    private float _turnSpeed = 2.5f;
     private float _gravity = -9.8f;
     private float _currentSpeed;
     CharacterController controller;
@@ -27,17 +27,10 @@ public class Batman_Movement : MonoBehaviour
         // Input
         float h = Input.GetAxisRaw("Horizontal");
         float v = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(h, 0, v).normalized;
 
         // Calculate Movement and Rotation
-        if (direction.magnitude >= 0.1f)
-        {
-            float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
-            Quaternion rot = Quaternion.Euler(0, targetAngle, 0);
-            transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * _turnSpeed);
-
-            controller.Move(transform.forward * _currentSpeed * Time.deltaTime);
-        }
+        transform.Rotate(Vector3.up, h * _turnSpeed); // Rotate left of right (A or D key)
+        controller.Move(transform.forward * v * _currentSpeed * Time.deltaTime); // Moving forward or backward (W or S key)
 
         // Gravity
         controller.Move(Vector3.up * _gravity * Time.deltaTime);

@@ -12,12 +12,14 @@ public class State_Manager : MonoBehaviour
     private BatmanState _currentState;
     private Batman_Movement batman_Movement;
     private Light_Manager light_Manager;
+    private Audio_Manager audioManager;
 
     void Start()
     {
         _currentState = BatmanState.Normal;
         batman_Movement = GameObject.Find("Batman").GetComponent<Batman_Movement>();
-        light_Manager = GameObject.Find("GameManager").GetComponent<Light_Manager>();
+        light_Manager = GetComponent<Light_Manager>();
+        audioManager = GetComponent<Audio_Manager>();
     }
 
     void Update()
@@ -41,25 +43,19 @@ public class State_Manager : MonoBehaviour
         {
             batman_Movement.SetNormalSpeed();
             light_Manager.SetNormalLight();
-
-            //if (alertSound.isPlaying)
-            //    alertSound.Stop();
+            audioManager.StopAlertMusic();
         }
         else if (_currentState == BatmanState.Stealth)
         {
             batman_Movement.SetSlowSpeed();
             light_Manager.SetStealthLight();
-
-            //if (alertSound.isPlaying)
-            //    alertSound.Stop();
+            audioManager.StopAlertMusic();
         }
         else if (_currentState == BatmanState.Alert)
         {
             batman_Movement.SetNormalSpeed();
             light_Manager.SetAlertLight();
-
-            //if (!alertSound.isPlaying)
-            //    alertSound.Play();
+            audioManager.PlayAlertMusic();
         }
     }
 }

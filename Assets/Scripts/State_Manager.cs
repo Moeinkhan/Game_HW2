@@ -11,11 +11,13 @@ public class State_Manager : MonoBehaviour
 {
     private BatmanState _currentState;
     private Batman_Movement batman_Movement;
+    private Light_Manager light_Manager;
 
     void Start()
     {
         _currentState = BatmanState.Normal;
         batman_Movement = GameObject.Find("Batman").GetComponent<Batman_Movement>();
+        light_Manager = GameObject.Find("GameManager").GetComponent<Light_Manager>();
     }
 
     void Update()
@@ -38,7 +40,7 @@ public class State_Manager : MonoBehaviour
         if (_currentState == BatmanState.Normal)
         {
             batman_Movement.SetNormalSpeed();
-            //sceneLight.intensity = 1f;
+            light_Manager.SetNormalLight();
 
             //if (alertSound.isPlaying)
             //    alertSound.Stop();
@@ -46,7 +48,7 @@ public class State_Manager : MonoBehaviour
         else if (_currentState == BatmanState.Stealth)
         {
             batman_Movement.SetSlowSpeed();
-            //sceneLight.intensity = 0.3f;
+            light_Manager.SetStealthLight();
 
             //if (alertSound.isPlaying)
             //    alertSound.Stop();
@@ -54,7 +56,7 @@ public class State_Manager : MonoBehaviour
         else if (_currentState == BatmanState.Alert)
         {
             batman_Movement.SetNormalSpeed();
-            //sceneLight.intensity = 1.5f;
+            light_Manager.SetAlertLight();
 
             //if (!alertSound.isPlaying)
             //    alertSound.Play();

@@ -5,7 +5,7 @@ public class Batman_Movement : MonoBehaviour
     [SerializeField]
     private float _moveSpeed = 10f;
     [SerializeField]
-    private float _turnSpeed = 2.5f;
+    private float _turnSpeed = 60f;
     private float _gravity = -9.8f;
     private float _currentSpeed;
     CharacterController controller;
@@ -29,7 +29,7 @@ public class Batman_Movement : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         // Calculate Movement and Rotation
-        transform.Rotate(Vector3.up, h * _turnSpeed); // Rotate left of right (A or D key)
+        transform.Rotate(Vector3.up, h * _turnSpeed * Time.deltaTime); // Rotate left of right (A or D key)
         controller.Move(transform.forward * v * _currentSpeed * Time.deltaTime); // Moving forward or backward (W or S key)
 
         // Gravity
